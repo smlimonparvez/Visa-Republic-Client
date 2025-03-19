@@ -31,11 +31,13 @@ const SignUp = () => {
     }
 
     signUp(email, password)
-      .then(() => {
+      .then((result) => {
         // const user = result.user;
         // setUser(user);
+        // console.log("User created successfully", user);
         userProfileUpdate({ displayName: person, photoURL: photoURL })
-          .then(() => {
+          .then((result) => {
+            // console.log("User profile updated successfully", result.user);
             navigate("/");
           })
           .catch((err) => {
@@ -52,6 +54,7 @@ const SignUp = () => {
       .then((result) => {
         const user = result.user;
         setUser(user);
+        console.log("User created successfully", user);
         navigate("/");
       })
       .catch((error) => {

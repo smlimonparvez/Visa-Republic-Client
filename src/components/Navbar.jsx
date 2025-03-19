@@ -100,12 +100,11 @@ const Navbar = () => {
       </div>
       <div className="navbar-end flex flex-col md:flex-row justify-end">
         {user && (
-          <div className="flex justify-center items-center gap-1 md:mr-2">
+          <div className="flex justify-center items-center gap-1 md:mr-2 tooltip-left tooltip" data-tip={`Welcome, ${user.displayName}`}>
             <img
               src={user.photoURL}
               alt={user.displayName}
-              className="w-10 h-10 rounded-full border border-blue-500 tooltip"
-              data-tip={`Welcome, ${user.displayName}`}
+              className="w-10 h-10 rounded-full border border-blue-500"
             />
           </div>
         )}

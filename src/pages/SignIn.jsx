@@ -1,16 +1,18 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../auth/AuthProvider";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const SignIn = () => {
-  const { signIn, setUser, googleSignIn } = useContext(AuthContext);
+  const { signIn, resetPassword, setUser, googleSignIn } =
+    useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   const [errorMessage, setErrorMessage] = useState("");
   const [showPass, setShowPass] = useState(false);
-  const [email, setEmail] = useState("");
+  const emailRef = useRef(null);
 
   const handleSignIn = (e) => {
     e.preventDefault();
@@ -43,6 +45,31 @@ const SignIn = () => {
         setErrorMessage(error.message);
       });
   };
+
+  const handleResetPassword = () => {
+    const email = emailRef.current.value;
+    // reset error message
+    setErrorMessage("");
+
+    if (!email) {
+      setErrorMessage("Please enter your email address");
+      return;
+    } else {
+      resetPassword(email)
+        .then(() => {
+          // setErrorMessage("Password reset link sent to your email");
+          Swal.fire({
+            title: "Password reset link sent to your email!",
+            icon: "success",
+            draggable: true,
+          });
+        })
+        .catch((error) => {
+          setErrorMessage(error.message);
+        });
+    }
+  };
+
   return (
     <div className="flex justify-center items-center py-18">
       <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
@@ -55,8 +82,7 @@ const SignIn = () => {
               type="email"
               className="input"
               placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              ref={emailRef}
             />
             <label className="fieldset-label">Password</label>
             <input
@@ -67,13 +93,9 @@ const SignIn = () => {
             />
             {errorMessage && <p className="text-red-600">{errorMessage}</p>}
             <div>
-              <Link
-                to="/login/forgetpassword"
-                state={{ email: email }}
-                className="link link-hover"
-              >
+              <a className="link link-hover" onClick={handleResetPassword}>
                 Forgot password?
-              </Link>
+              </a>
             </div>
             <button className="btn btn-neutral mt-4">Login</button>
           </form>
