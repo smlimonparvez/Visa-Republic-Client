@@ -5,6 +5,7 @@ const VisaDetails = () => {
   const { id } = useParams();
   const [visaDetails, setVisaDetails] = useState({});
   const {
+    country_image,
     country_name,
     visa_type,
     processing_time,
@@ -26,7 +27,8 @@ const VisaDetails = () => {
     <div className="my-20">
       <h1 className="text-4xl font-bold text-center">Visa Details</h1>
       <div className="mx-auto max-w-2xl space-y-2 mt-10 p-5 border border-gray-300 bg-gray-100 rounded-lg">
-        <h2 className="text-2xl font-semibold">{country_name}</h2>
+        <img src={country_image} alt={country_name} className="w-full rounded-lg" />
+        <h2 className="text-3xl font-semibold mt-4">{country_name}</h2>
         <p>
           <span className="font-semibold text-lg">Visa type:</span> {visa_type}
         </p>

@@ -43,7 +43,7 @@ const AddVisa = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:5000/visas", {
+      const response = await fetch("http://localhost:5000/visa", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -57,6 +57,7 @@ const AddVisa = () => {
           icon: "success",
           draggable: true,
         });
+        e.target.reset();
         // console.log("Visa added:", await response.json());
       } else {
         Swal.fire({
