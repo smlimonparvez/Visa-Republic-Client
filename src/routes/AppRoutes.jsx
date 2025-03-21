@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router";
+import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider, Routes } from "react-router";
 import Layout from "../layout/Layout";
 import Home from "../pages/Home";
 import SignIn from "../pages/SignIn";
@@ -10,6 +10,7 @@ import AllVisas from "../pages/AllVisas";
 import MyAddedVisas from "../pages/MyAddedVisas";
 import PrivateRoute from "./PrivateRoute";
 import MyVisaApplications from "../pages/MyVisaApplications";
+
 
 const AppRoutes = () => {
   return (
