@@ -1,5 +1,11 @@
 import React from "react";
-import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider, Routes } from "react-router";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+  Routes,
+} from "react-router";
 import Layout from "../layout/Layout";
 import Home from "../pages/Home";
 import SignIn from "../pages/SignIn";
@@ -10,7 +16,7 @@ import AllVisas from "../pages/AllVisas";
 import MyAddedVisas from "../pages/MyAddedVisas";
 import PrivateRoute from "./PrivateRoute";
 import MyVisaApplications from "../pages/MyVisaApplications";
-
+import VisaDetails from "../pages/VisaDetails";
 
 const AppRoutes = () => {
   return (
@@ -25,6 +31,14 @@ const AppRoutes = () => {
           element={
             <PrivateRoute>
               <AddVisa />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="visa-details/:id"
+          element={
+            <PrivateRoute>
+              <VisaDetails />
             </PrivateRoute>
           }
         />

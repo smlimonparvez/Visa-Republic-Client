@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
 
 const AllVisas = () => {
     const [visas, setVisas] = useState([]);
+    const navigate = useNavigate();
     
     useEffect(() => {
-        fetch("http://localhost:5000/visas")
+        fetch("http://localhost:5000/visa")
         .then((response) => response.json())
         .then((data) => setVisas(data));
     },[]);
+
+    const handleClickDetails = (id) => {
+        navigate(`/visa-details/${id}`);
+    }
 
     return (
         <div className='my-20 w-5/6 mx-auto'>
@@ -29,7 +35,7 @@ const AllVisas = () => {
                                 <li key={index}>{doc}</li>
                             ))}
                         </ul> */}
-                        <button className='btn bg-lime-300'>See Details</button>
+                        <button onClick={() => {handleClickDetails(visa._id)}} className='btn bg-lime-300 mt-5'>See Details</button>
                     </div>
                 ))
             }
