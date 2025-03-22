@@ -40,6 +40,7 @@ const AddVisa = () => {
     }
   };
 
+   // send data to the server
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
