@@ -109,9 +109,9 @@ const Navbar = () => {
           </div>
         )}
         {user ? (
-          <Link onClick={handleLogOut} className="btn">
+          <button onClick={handleLogOut} className="btn">
             Log Out
-          </Link>
+          </button>
         ) : (
           <div className="flex flex-col md:flex-row gap-2">
             <Link to="/signin" className="btn">

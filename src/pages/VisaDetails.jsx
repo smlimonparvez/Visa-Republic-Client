@@ -67,6 +67,7 @@ const VisaDetails = () => {
             draggable: true,
           });
           e.target.reset();
+          setVisaModal(null); // close modal
         } else {
           Swal.fire({
             icon: "error",
