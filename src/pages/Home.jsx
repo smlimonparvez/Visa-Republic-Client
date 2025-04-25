@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
+import { useNavigate } from "react-router";
 
 const Home = () => {
+  const [limitedVisa, setLimitedVisa] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetch("http://localhost:5000/visa-limited")
+      .then((response) => response.json())
+      .then((data) => setLimitedVisa(data));
+  }, []);
+
+  const handleClickDetails = (id) => {
+    navigate(`/visa-details/${id}`);
+  };
+
   return (
     <div className="my-32">
       <div className="w-5/6 mx-auto mt-16">
@@ -91,6 +105,53 @@ const Home = () => {
           </SwiperSlide>
         </Swiper>
       </div>
+      {/* limited visa */}
+      <h1 className="text-3xl md:text-5xl font-bold text-center mb-10">
+        Limited Visa Cards
+      </h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10 w-5/6 mx-auto">
+        {limitedVisa.map((visa) => (
+          <div
+            key={visa._id}
+            className="w-5/6 mx-auto mt-16 p-5 space-y-2 border border-gray-300 bg-gray-100 rounded-lg shadow-md"
+          >
+            <img
+              src={visa.country_image}
+              alt={visa.country_name}
+              className="w-full rounded-lg h-40"
+            />
+            <h2 className="text-2xl font-semibold">{visa.country_name}</h2>
+            <p>
+              <span className="font-semibold text-lg">Visa type:</span>{" "}
+              {visa.visa_type}
+            </p>
+            <p>
+              <span className="font-semibold text-lg">Processing time:</span>{" "}
+              {visa.processing_time}
+            </p>
+            <p>
+              <span className="font-semibold text-lg">Fee:</span> ${visa.fee}
+            </p>
+            <p>
+              <span className="font-semibold text-lg">Validity:</span>{" "}
+              {visa.validity}
+            </p>
+            <p>
+              <span className="font-semibold text-lg">Application Method:</span>{" "}
+              {visa.application_method}
+            </p>
+            <button
+              onClick={() => {
+                handleClickDetails(visa._id);
+              }}
+              className="btn"
+            >
+              See Details
+            </button>
+          </div>
+        ))}
+      </div>
+      {/* why choose us */}
       <div className="w-5/6 mx-auto mt-16">
         <h1 className="text-3xl md:text-5xl font-bold text-center mb-10">
           Why Choose Us?
@@ -116,6 +177,35 @@ const Home = () => {
               Our clients' satisfaction is our top priority. We strive to exceed
               expectations at every step of the process.
             </p>
+          </div>
+        </div>
+      </div>
+      {/* testimonials */}
+      <div className="w-5/6 mx-auto mt-16">
+        <h1 className="text-3xl md:text-5xl font-bold text-center mb-10">
+          Client Testimonials
+        </h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="p-5 space-y-2 border border-gray-300 bg-gray-100 rounded-lg shadow-md">
+            <p>
+              "I had a great experience with this visa consultancy. They made
+              the process so easy and stress-free!"
+            </p>
+            <h2 className="text-xl font-semibold">John Doe</h2>
+          </div>
+          <div className="p-5 space-y-2 border border-gray-300 bg-gray-100 rounded-lg shadow-md">
+            <p>
+              "The team was very knowledgeable and helped me every step of the
+              way. I highly recommend their services!"
+            </p>
+            <h2 className="text-xl font-semibold">Jane Smith</h2>
+          </div>
+          <div className="p-5 space-y-2 border border-gray-300 bg-gray-100 rounded-lg shadow-md">
+            <p>
+              "I was impressed with their professionalism and attention to
+              detail. They made my visa application a breeze!"
+            </p>
+            <h2 className="text-xl font-semibold">Michael Johnson</h2>
           </div>
         </div>
       </div>

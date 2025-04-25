@@ -3,8 +3,8 @@ import { AuthContext } from "../auth/AuthProvider";
 import Swal from "sweetalert2";
 
 const MyAddedVisas = () => {
-  const { user, setLoading, setVisas, visas } = useContext(AuthContext);
-  // const [visas, setVisas] = useState([]);
+  const { user, setLoading } = useContext(AuthContext);
+  const [visas, setVisas] = useState([]);
   const [selectedVisa, setSelectedVisa] = useState(null);
   const [formData, setFormData] = useState({
     country_image: "",
@@ -21,6 +21,7 @@ const MyAddedVisas = () => {
 
   // Fetch visas added by the logged-in user
   useEffect(() => {
+    console.log(user?.email);
     if (user?.email) {
       fetch(`http://localhost:5000/my-visa?userEmail=${user.email}`)
         .then((res) => res.json())
@@ -122,7 +123,7 @@ const MyAddedVisas = () => {
             visas.map((v) =>
               v._id === formData._id ? { ...v, ...formData } : v
             )
-          ); 
+          );
           setSelectedVisa(null); // Close modal
         }
       })
