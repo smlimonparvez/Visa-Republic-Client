@@ -3,8 +3,8 @@ import { AuthContext } from "../auth/AuthProvider";
 import Swal from "sweetalert2";
 
 const MyAddedVisas = () => {
-  const { user, setLoading } = useContext(AuthContext);
-  const [visas, setVisas] = useState([]);
+  const { user, setLoading, setVisas, visas } = useContext(AuthContext);
+  // const [visas, setVisas] = useState([]);
   const [selectedVisa, setSelectedVisa] = useState(null);
   const [formData, setFormData] = useState({
     country_image: "",
@@ -100,21 +100,6 @@ const MyAddedVisas = () => {
   // Submit Updated Visa
   const handlesubmitUpdate = (e) => {
     e.preventDefault();
-    // console.log(selectedVisa._id);
-    // const formData = {
-    //   country_image: e.target.country_image.value,
-    //   country_name: e.target.country_name.value,
-    //   visa_type: e.target.visa_type.value,
-    //   processing_time: e.target.processing_time.value,
-    //   required_documents: Array.from(
-    //     e.target.querySelectorAll('input[name="required_documents"]:checked')
-    //   ).map((checkbox) => checkbox.value),
-    //   description: e.target.description.value,
-    //   age_restriction: e.target.age_restriction.value,
-    //   fee: e.target.fee.value,
-    //   validity: e.target.validity.value,
-    //   application_method: e.target.application_method.value,
-    // };
 
     fetch(`http://localhost:5000/visa/${selectedVisa._id}`, {
       method: "PUT",
@@ -131,11 +116,13 @@ const MyAddedVisas = () => {
             icon: "success",
             draggable: true,
           });
+
+          // Update UI
           setVisas(
             visas.map((v) =>
               v._id === formData._id ? { ...v, ...formData } : v
             )
-          ); // Update UI
+          ); 
           setSelectedVisa(null); // Close modal
         }
       })
