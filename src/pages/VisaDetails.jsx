@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import Swal from "sweetalert2";
+import { AuthContext } from "../auth/AuthProvider";
 
 const VisaDetails = () => {
+  const {user} = useContext(AuthContext);
   const { id } = useParams();
   const [visaDetails, setVisaDetails] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -47,44 +49,43 @@ const VisaDetails = () => {
     const fee = e.target.fee.value;
 
     // console.log(firstName, lastName, email, date, fee);
-    const visaApplication = { firstName, lastName, email, date, fee };
+    const visaApplication = { firstName, lastName, email, date, fee, userEmail: user?.email, visaId: id };
 
     // send data to the server
-   try{
-    const response = await fetch("http://localhost:5000/visa-application", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(visaApplication),
-    })
+    try {
+      const response = await fetch("http://localhost:5000/visa-application", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(visaApplication),
+      });
       // .then((response) => response.json())
       // .then((data) => {
-        if (response.ok) {
-          Swal.fire({
-            title: "Successfully Applied!",
-            icon: "success",
-            draggable: true,
-          });
-          e.target.reset();
-          setVisaModal(null); // close modal
-        } else {
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Failed to add visa application. Please try again.",
-          });
-        }
-   }
-   catch (error) {
+      if (response.ok) {
+        Swal.fire({
+          title: "Successfully Applied!",
+          icon: "success",
+          draggable: true,
+        });
+        e.target.reset();
+        setVisaModal(null); // close modal
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Failed to add visa application. Please try again.",
+        });
+      }
+    } catch (error) {
       Swal.fire({
         icon: "error",
         title: "Oops...",
         text: "Something went wrong. Please try again.",
       });
     }
-};
-return (
+  };
+  return (
     <div className="my-20">
       <h1 className="text-4xl font-bold text-center">Visa Details</h1>
       <div className="mx-auto max-w-2xl space-y-2 mt-10 p-5 border border-gray-300 bg-gray-100 rounded-lg">
@@ -148,30 +149,35 @@ return (
                 type="text"
                 placeholder="First Name"
                 className="input"
+                required
               />
               <input
                 name="lastName"
                 type="text"
                 placeholder="Last Name"
                 className="input"
+                required
               />
               <input
                 name="email"
                 type="email"
                 placeholder="Email"
                 className="input"
+                required
               />
               <input
                 name="date"
                 type="text"
                 placeholder="Applied Date"
                 className="input"
+                required
               />
               <input
                 name="fee"
                 type="text"
                 placeholder="Fee"
                 className="input"
+                required
               />
               <div className="flex justify-between w-4/6 mt-5">
                 <button className="btn bg-lime-300">Apply</button>
