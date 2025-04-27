@@ -1,4 +1,3 @@
-# React + Vite
 __Project Name:__ Visa Republic <br>
 
 **Live URL:** https://visa-republic-833cf.web.app <br>
