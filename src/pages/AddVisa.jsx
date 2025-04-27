@@ -61,6 +61,18 @@ const AddVisa = () => {
           icon: "success",
           draggable: true,
         });
+        setFormData({
+          country_image: "",
+          country_name: "",
+          visa_type: "",
+          processing_time: "",
+          required_documents: [],
+          description: "",
+          age_restriction: "",
+          fee: "",
+          validity: "",
+          application_method: "",
+        });
         e.target.reset();
         // console.log("Visa added:", await response.json());
       } else {

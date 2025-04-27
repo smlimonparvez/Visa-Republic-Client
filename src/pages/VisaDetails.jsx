@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import { AuthContext } from "../auth/AuthProvider";
 
 const VisaDetails = () => {
-  const {user} = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const { id } = useParams();
   const [visaDetails, setVisaDetails] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -49,7 +49,15 @@ const VisaDetails = () => {
     const fee = e.target.fee.value;
 
     // console.log(firstName, lastName, email, date, fee);
-    const visaApplication = { firstName, lastName, email, date, fee, userEmail: user?.email, visaId: id };
+    const visaApplication = {
+      firstName,
+      lastName,
+      email,
+      date,
+      fee,
+      userEmail: user?.email,
+      visaId: id,
+    };
 
     // send data to the server
     try {
@@ -86,9 +94,9 @@ const VisaDetails = () => {
     }
   };
   return (
-    <div className="my-20">
+    <div className="my-16">
       <h1 className="text-4xl font-bold text-center">Visa Details</h1>
-      <div className="mx-auto max-w-2xl space-y-2 mt-10 p-5 border border-gray-300 bg-gray-100 rounded-lg">
+      <div className="w-5/6 mx-auto max-w-2xl space-y-2 mt-10 p-5 border border-gray-300 bg-gray-100 rounded-lg">
         <img
           src={country_image}
           alt={country_name}
@@ -112,6 +120,12 @@ const VisaDetails = () => {
         <p>
           <span className="font-semibold text-lg">Validity:</span> {validity}
         </p>
+        <p className="font-semibold text-lg">Required documents:</p>
+        <ul className="list-disc ml-8">
+          {required_documents.map((doc, index) => (
+            <li key={index}>{doc}</li>
+          ))}
+        </ul>
         <p>
           <span className="font-semibold text-lg">Description:</span>{" "}
           {description}
@@ -120,12 +134,6 @@ const VisaDetails = () => {
           <span className="font-semibold text-lg">Application method:</span>{" "}
           {application_method}
         </p>
-        <p className="font-semibold text-lg">Required documents:</p>
-        <ul className="list-disc ml-8">
-          {required_documents.map((doc, index) => (
-            <li key={index}>{doc}</li>
-          ))}
-        </ul>
         <button
           onClick={() => openModal(visaDetails)}
           className="btn bg-lime-300 mt-5"

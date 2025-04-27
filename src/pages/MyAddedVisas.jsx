@@ -121,7 +121,7 @@ const MyAddedVisas = () => {
           // Update UI
           setVisas(
             visas.map((v) =>
-              v._id === formData._id ? { ...v, ...formData } : v
+              v._id === selectedVisa._id ? { ...v, ...formData } : v
             )
           );
           setSelectedVisa(null); // Close modal
@@ -131,22 +131,22 @@ const MyAddedVisas = () => {
   };
 
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">My Added Visas</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className="w-5/6 mx-auto my-16">
+      <h1 className="text-4xl font-bold mb-10 text-center">My Added Visas</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {visas.map((visa) => (
-          <div key={visa._id} className="border p-4 rounded-lg shadow-md">
+          <div key={visa._id} className="border p-4 rounded-lg shadow-md space-y-2">
             <img
               src={visa.country_image}
               alt={visa.country_name}
-              className="w-full h-32 object-cover mb-2"
+              className="w-full object-cover mb-2"
             />
-            <h2 className="text-xl font-bold">{visa.country_name}</h2>
-            <p>Visa Type: {visa.visa_type}</p>
-            <p>Processing Time: {visa.processing_time}</p>
-            <p>Fee: ${visa.fee}</p>
-            <p>Validity: {visa.validity}</p>
-            <p>Application Method: {visa.application_method}</p>
+            <h2 className="text-xl font-bold mt-5">{visa.country_name}</h2>
+            <p><span className="font-semibold">Visa Type:</span> {visa.visa_type}</p>
+            <p><span className="font-semibold">Processing Time:</span> {visa.processing_time}</p>
+            <p><span className="font-semibold">Fee:</span> ${visa.fee}</p>
+            <p><span className="font-semibold">Validity:</span> {visa.validity}</p>
+            <p><span className="font-semibold">Application Method:</span> {visa.application_method}</p>
             <div className="mt-4 flex space-x-2">
               <button
                 onClick={() => handleModal(visa)}
