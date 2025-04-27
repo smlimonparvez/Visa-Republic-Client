@@ -21,7 +21,7 @@ const MyAddedVisas = () => {
 
   // Fetch visas added by the logged-in user
   useEffect(() => {
-    console.log(user?.email);
+    // console.log(user?.email);
     if (user?.email) {
       fetch(`http://localhost:5000/my-visa?userEmail=${user.email}`)
         .then((res) => res.json())
@@ -70,6 +70,18 @@ const MyAddedVisas = () => {
   // Handle Update modal
   const handleModal = (visa) => {
     setSelectedVisa(visa); // Set the selected visa for the update modal
+    setFormData({
+      country_image: visa.country_image || "",
+      country_name: visa.country_name || "",
+      visa_type: visa.visa_type || "",
+      processing_time: visa.processing_time || "",
+      required_documents: visa.required_documents || [],
+      description: visa.description || "",
+      age_restriction: visa.age_restriction || "",
+      fee: visa.fee || "",
+      validity: visa.validity || "",
+      application_method: visa.application_method || "",
+    });
   };
 
   const handleChange = (e) => {
@@ -135,18 +147,33 @@ const MyAddedVisas = () => {
       <h1 className="text-4xl font-bold mb-10 text-center">My Added Visas</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {visas.map((visa) => (
-          <div key={visa._id} className="border p-4 rounded-lg shadow-md space-y-2">
+          <div
+            key={visa._id}
+            className="border p-4 rounded-lg shadow-md space-y-2"
+          >
             <img
               src={visa.country_image}
               alt={visa.country_name}
               className="w-full object-cover mb-2"
             />
             <h2 className="text-xl font-bold mt-5">{visa.country_name}</h2>
-            <p><span className="font-semibold">Visa Type:</span> {visa.visa_type}</p>
-            <p><span className="font-semibold">Processing Time:</span> {visa.processing_time}</p>
-            <p><span className="font-semibold">Fee:</span> ${visa.fee}</p>
-            <p><span className="font-semibold">Validity:</span> {visa.validity}</p>
-            <p><span className="font-semibold">Application Method:</span> {visa.application_method}</p>
+            <p>
+              <span className="font-semibold">Visa Type:</span> {visa.visa_type}
+            </p>
+            <p>
+              <span className="font-semibold">Processing Time:</span>{" "}
+              {visa.processing_time}
+            </p>
+            <p>
+              <span className="font-semibold">Fee:</span> ${visa.fee}
+            </p>
+            <p>
+              <span className="font-semibold">Validity:</span> {visa.validity}
+            </p>
+            <p>
+              <span className="font-semibold">Application Method:</span>{" "}
+              {visa.application_method}
+            </p>
             <div className="mt-4 flex space-x-2">
               <button
                 onClick={() => handleModal(visa)}
