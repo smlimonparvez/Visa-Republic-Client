@@ -7,7 +7,7 @@ const AllVisas = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:5000/visa")
+    fetch("https://rs9-a10-server.vercel.app/visa")
       .then((response) => response.json())
       .then((data) => setVisas(data));
   }, []);

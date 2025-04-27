@@ -10,7 +10,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:5000/visa-limited")
+    fetch("https://rs9-a10-server.vercel.app/visa-limited")
       .then((response) => response.json())
       .then((data) => setLimitedVisa(data));
   }, []);

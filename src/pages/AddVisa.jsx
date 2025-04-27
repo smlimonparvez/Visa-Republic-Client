@@ -47,7 +47,7 @@ const AddVisa = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:5000/visa", {
+      const response = await fetch("https://rs9-a10-server.vercel.app/visa", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

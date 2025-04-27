@@ -11,7 +11,7 @@ const MyVisaApplications = () => {
   useEffect(() => {
     // console.log(user?.email);
     if (user?.email) {
-      fetch(`http://localhost:5000/my-visa-application?userEmail=${user.email}`)
+      fetch(`https://rs9-a10-server.vercel.app/my-visa-application?userEmail=${user.email}`)
         .then((res) => res.json())
         .then((data) => {
           setApplications(data);
@@ -43,7 +43,7 @@ const MyVisaApplications = () => {
       confirmButtonText: "Yes, cancel it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/visa-application/${id}`, {
+        fetch(`https://rs9-a10-server.vercel.app/visa-application/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

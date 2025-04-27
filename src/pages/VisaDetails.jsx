@@ -24,7 +24,7 @@ const VisaDetails = () => {
   } = visaDetails;
 
   useEffect(() => {
-    fetch(`http://localhost:5000/visa/${id}`)
+    fetch(`https://rs9-a10-server.vercel.app/visa/${id}`)
       .then((response) => response.json())
       .then((data) => setVisaDetails(data));
   }, []);
@@ -61,7 +61,7 @@ const VisaDetails = () => {
 
     // send data to the server
     try {
-      const response = await fetch("http://localhost:5000/visa-application", {
+      const response = await fetch("https://rs9-a10-server.vercel.app/visa-application", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
