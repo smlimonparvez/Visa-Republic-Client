@@ -4,7 +4,7 @@ import { FaEarthAfrica } from "react-icons/fa6";
 
 const Footer = () => {
   return (
-    <footer className="footer footer-horizontal footer-center bg-gray-200 text-base-content rounded p-10">
+    <footer className="dark:text-gray-800 footer footer-horizontal footer-center bg-gray-200 text-base-content rounded p-10">
     <nav className="flex flex-col gap-1">
       <p className="font-semibold text-base">1235 Newyork City, Newyork, USA</p>
       <p className="flex justify-center items-center gap-2"><FaEarthAfrica /> www.visarepublic.com</p>

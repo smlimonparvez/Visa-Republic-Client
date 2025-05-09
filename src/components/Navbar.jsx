@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../auth/AuthProvider";
 import { Link, NavLink } from "react-router";
+import DarkMode from "./DarkMode";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -20,6 +21,7 @@ const Navbar = () => {
             ? "mr-3 text-base font-semibold text-blue-700 underline"
             : "mr-3 text-gray-500 text-base font-semibold hover:text-blue-700 hover:underline"
         }
+        
       >
         Home
       </NavLink>
@@ -98,9 +100,16 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
-      <div className="navbar-end flex flex-col md:flex-row justify-end">
+      <div className="navbar-end flex gap-2 md:flex-row justify-end">
+        
+        {/* dark light mode swap */}
+        <DarkMode></DarkMode>
+
         {user && (
-          <div className="flex justify-center items-center gap-1 md:mr-2 tooltip-left tooltip" data-tip={`Welcome, ${user.displayName}`}>
+          <div
+            className="flex justify-center items-center gap-1 md:mr-2 tooltip-left tooltip"
+            data-tip={`Welcome, ${user.displayName}`}
+          >
             <img
               src={user.photoURL}
               alt={user.displayName}
@@ -108,6 +117,7 @@ const Navbar = () => {
             />
           </div>
         )}
+
         {user ? (
           <button onClick={handleLogOut} className="btn">
             Log Out
